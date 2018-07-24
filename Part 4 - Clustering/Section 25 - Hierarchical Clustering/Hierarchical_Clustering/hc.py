@@ -24,15 +24,28 @@ y_train = sc_y.fit_transform(y_train)"""
 
 # Using the dendrogram to find the optimal number of clusters
 import scipy.cluster.hierarchy as sch
+#linkage is the whole algo steps of HC
+#ward method minimizing the within cluster varience like in WCSS in k means 
 dendrogram = sch.dendrogram(sch.linkage(X, method = 'ward'))
 plt.title('Dendrogram')
 plt.xlabel('Customers')
 plt.ylabel('Euclidean distances')
 plt.show()
+#so the output is 5
+#see the longest distance 
+#them look for horizontal lines crossing the longest lines 
+#find the longest distance without any horizontal line crossing 
+#draw the horizontal line and count the no of vertical lines interesting that horizontal line
 
 # Fitting Hierarchical Clustering to the dataset
+#likewise done in K means 
+#we are going to use bottom up approach by importing AGGlomerativeClustering
 from sklearn.cluster import AgglomerativeClustering
+#affinity = distance to find the distance 
+#any other distance can be used 
 hc = AgglomerativeClustering(n_clusters = 5, affinity = 'euclidean', linkage = 'ward')
+#y_pred gives the vector
+#telling which cluster the customer belongs to 
 y_hc = hc.fit_predict(X)
 
 # Visualising the clusters
