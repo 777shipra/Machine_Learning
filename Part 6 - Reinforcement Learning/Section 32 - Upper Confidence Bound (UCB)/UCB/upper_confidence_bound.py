@@ -10,17 +10,18 @@ dataset = pd.read_csv('Ads_CTR_Optimisation.csv')
 
 # Implementing UCB
 import math
-N = 10000
-d = 10
-ads_selected = []
-numbers_of_selections = [0] * d
-sums_of_rewards = [0] * d
+N = 10000 #total no of users
+d = 10#total no of ads
+ads_selected = []#record of the ad selected according to the max upper bound
+numbers_of_selections = [0] * d # 0 because initially no ad is selected 
+sums_of_rewards = [0] * d#initially 0
 total_reward = 0
-for n in range(0, N):
+for n in range(0, N):#for all the users
     ad = 0
     max_upper_bound = 0
-    for i in range(0, d):
+    for i in range(0, d):#for allthe ads
         if (numbers_of_selections[i] > 0):
+            #formula for UCB
             average_reward = sums_of_rewards[i] / numbers_of_selections[i]
             delta_i = math.sqrt(3/2 * math.log(n + 1) / numbers_of_selections[i])
             upper_bound = average_reward + delta_i
