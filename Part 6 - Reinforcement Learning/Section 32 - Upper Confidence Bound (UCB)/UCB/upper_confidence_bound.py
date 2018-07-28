@@ -32,12 +32,12 @@ for n in range(0, N):#for all the users
             ad = i
     ads_selected.append(ad)
     numbers_of_selections[ad] = numbers_of_selections[ad] + 1
-    reward = dataset.values[n, ad]
-    sums_of_rewards[ad] = sums_of_rewards[ad] + reward
+    reward = dataset.values[n, ad]#real reward n index of row and ad column 
+    sums_of_rewards[ad] = sums_of_rewards[ad] + reward #increamenting the sum of reward of particular ad
     total_reward = total_reward + reward
 
 # Visualising the results
-plt.hist(ads_selected)
+plt.hist(ads_selected)#histogram
 plt.title('Histogram of ads selections')
 plt.xlabel('Ads')
 plt.ylabel('Number of times each ad was selected')
