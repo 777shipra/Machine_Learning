@@ -38,3 +38,6 @@ plt.title('Histogram of ads selections')
 plt.xlabel('Ads')
 plt.ylabel('Number of times each ad was selected')
 plt.show()
+
+''' total rewards in thompson sampling are more than in UCB
+we had other upper bars in UCB but in thompson '''
