@@ -11,16 +11,23 @@ import pandas as pd
 dataset = pd.read_csv('Restaurant_Reviews.tsv', delimiter = '\t', quoting = 3)
 
 # Cleaning the texts
-import re
+''' getting rid of the texts which are not usefull in prediction such as on the is 
+also the punctuations (...)
+applying stamin means (loved is the form of love ) so we will only take love not loved from the reviews 
+stamming is applied in order not to have too many words in the end without changing their meaning in the reviews
+getting rid of the capitals 
+and then we will move forward to bag of words 
+bag of words which is the tokenization method that is it will split the reviews , give one word and will create a sparx matrix '''
+import re #used to clean the text
 import nltk
-nltk.download('stopwords')
-from nltk.corpus import stopwords
+nltk.download('stopwords')#it is the list containing the word which we do not want in the review
+from nltk.corpus import stopwords#to import stopwords to spyder
 from nltk.stem.porter import PorterStemmer
 corpus = []
 for i in range(0, 1000):
-    review = re.sub('[^a-zA-Z]', ' ', dataset['Review'][i])
-    review = review.lower()
-    review = review.split()
+    review = re.sub('[^a-zA-Z]', ' ', dataset['Review'][i])# for having only letters in the review a-zA-Z , replacing them with space inorder to stick the words if we remove some signs and numbers , the index 
+    review = review.lower()#make all lower case letters in review
+    review = review.split()#spiliting the string into list of strings containing each word seperated
     ps = PorterStemmer()
     review = [ps.stem(word) for word in review if not word in set(stopwords.words('english'))]
     review = ' '.join(review)
