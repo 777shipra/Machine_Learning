@@ -52,7 +52,7 @@ why ?
 -to predict positive or negative by training the machine  
 here we are doing nothing as classification  '''
 from sklearn.feature_extraction.text import CountVectorizer #for tokenization as manually it will take alot of time 
-cv = CountVectorizer(max_features = 1500)
+cv = CountVectorizer(max_features = 1500)#max_features discard irrrelevant words and keep the most frequent words 
 X = cv.fit_transform(corpus).toarray()#this step will create the sparx matrix , X is the matrix of features
 y = dataset.iloc[:, 1].values
 
@@ -61,6 +61,7 @@ from sklearn.cross_validation import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20, random_state = 0)
 
 # Fitting Naive Bayes to the Training set
+#most common models for NLP are naive bayes and decision tree
 from sklearn.naive_bayes import GaussianNB
 classifier = GaussianNB()
 classifier.fit(X_train, y_train)
