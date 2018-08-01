@@ -1,13 +1,19 @@
 # Artificial Neural Network
 
+
 # Installing Theano
 # pip install --upgrade --no-deps git+git://github.com/Theano/Theano.git
+''' it performs numerical computation very fast both on CPU and  GPU(process of graphic purposes)
+ '''
 
 # Installing Tensorflow
 # Install Tensorflow from the website: https://www.tensorflow.org/versions/r0.12/get_started/os_setup.html
-
+#same , by google , these two are used for deep learning  
+ 
+ 
 # Installing Keras
 # pip install --upgrade keras
+ #it wraps the above two , to build models , in only view lines of code
 
 # Part 1 - Data Preprocessing
 
