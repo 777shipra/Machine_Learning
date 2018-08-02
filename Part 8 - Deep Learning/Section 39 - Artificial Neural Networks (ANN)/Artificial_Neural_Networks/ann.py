@@ -51,25 +51,40 @@ X_test = sc.transform(X_test)
 
 # Importing the Keras libraries and packages
 import keras
-from keras.models import Sequential
-from keras.layers import Dense
+from keras.models import Sequential #required to initial our neural network
+from keras.layers import Dense#to create the neural network 
 
 # Initialising the ANN
-classifier = Sequential()
+classifier = Sequential() #two ways of definning one by sequential or by definning a graph 
 
 # Adding the input layer and the first hidden layer
+#output_dim= no of nodes in the layer +nodes in output layer/2 =11+1/2=6
+#how many nodes ?- no rule -experimenting with k-4 cross validation 
+#init- initialise the weights 
+#activation function is the rectifier function (relu)for input layer and sigmoid for the output layer
+#input_dim= it is compulsory argument -> as we are initialising our nn , so not initialising for the next hidden rate 
+
 classifier.add(Dense(output_dim = 6, init = 'uniform', activation = 'relu', input_dim = 11))
 
 # Adding the second hidden layer
 classifier.add(Dense(output_dim = 6, init = 'uniform', activation = 'relu'))
 
 # Adding the output layer
+#as we need probabilities we will use sigmoid function 
 classifier.add(Dense(output_dim = 1, init = 'uniform', activation = 'sigmoid'))
 
 # Compiling the ANN
+#optimizer - is the algo used to find the optimal set of weights in nn , best weights 
+#stachastic GD is we are going to use and one type of SGD is adam 
+#loss-> adam is based on a loss function (cos function ) and as our activation function is sigmoid 
+#when the output is in binary we use binary _crossentropy and if more than categorical_crossentropy
+#metrics-> it improves the performance of the models after weights are updated the algo uses this function
+#metric expects a list and we will add only one attribute
 classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 
 # Fitting the ANN to the Training set
+#batch_size->tells after which u want to update the weights 
+#nb_epoch->happens after the whole ANN
 classifier.fit(X_train, y_train, batch_size = 10, nb_epoch = 100)
 
 # Part 3 - Making the predictions and evaluating the model
