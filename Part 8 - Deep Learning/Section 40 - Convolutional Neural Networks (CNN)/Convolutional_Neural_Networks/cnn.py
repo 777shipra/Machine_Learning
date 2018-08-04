@@ -9,19 +9,33 @@
 # Installing Keras
 # pip install --upgrade keras
 
+#since the data preprocessing was done manually so 
 # Part 1 - Building the CNN
 
 # Importing the Keras libraries and packages
-from keras.models import Sequential
-from keras.layers import Convolution2D
-from keras.layers import MaxPooling2D
-from keras.layers import Flatten
-from keras.layers import Dense
+from keras.models import Sequential#to initialize
+from keras.layers import Convolution2D#for convolutional layers , as images are 2d unlike videos in 3d
+from keras.layers import MaxPooling2D#pooling layers
+from keras.layers import Flatten#for input layer 
+from keras.layers import Dense#to add input layers to NN
 
 # Initialising the CNN
+#making an object of sequential
 classifier = Sequential()
 
 # Step 1 - Convolution
+#it is the first layer of CNN
+#32,3,3 no of filter used and each filter will create one feature map . 3X3 matrix rows and column of 32 feature detector
+#working on CPU and also beginning number is 32
+#input_shape ->shape of the input image 
+#as all our images are not in the same size so force them into one format 64,64,3 is the 
+# 3 is for the 3 channels of the color image -> blue green red channel
+#64X64 format are enough for CPU 
+#128X128 or 255X255 for GPU 
+#for keras (64,64,3) is the format (dimention,dimention,channel)
+#channel is 1 for black and white image 
+#activation function just to sure we don't have any -ve pixels to take care of the non-linearity 
+#rectifier function is the activation function 
 classifier.add(Convolution2D(32, 3, 3, input_shape = (64, 64, 3), activation = 'relu'))
 
 # Step 2 - Pooling
