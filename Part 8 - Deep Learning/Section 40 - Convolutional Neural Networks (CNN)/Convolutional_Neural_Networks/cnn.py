@@ -57,35 +57,42 @@ classifier.add(MaxPooling2D(pool_size = (2, 2)))
 classifier.add(Flatten())
 
 # Step 4 - Full connection
+#output_dim-> no of nodes in the hidden layer, 128 for  experimentation
+#hidden layer 
 classifier.add(Dense(output_dim = 128, activation = 'relu'))
+#output layer 
 classifier.add(Dense(output_dim = 1, activation = 'sigmoid'))
+
 
 # Compiling the CNN
 classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 
 # Part 2 - Fitting the CNN to the images
-
+#preprocess the image to prevent overfitting of the images
+#took the code from keras documentation 
 from keras.preprocessing.image import ImageDataGenerator
 
-train_datagen = ImageDataGenerator(rescale = 1./255,
+train_datagen = ImageDataGenerator(rescale = 1./255,#we know the pixel value are from 0 - 255 so this will scale them in between 0-1
                                    shear_range = 0.2,
                                    zoom_range = 0.2,
                                    horizontal_flip = True)
 
 test_datagen = ImageDataGenerator(rescale = 1./255)
 
+#creating the training and the test set
 training_set = train_datagen.flow_from_directory('dataset/training_set',
                                                  target_size = (64, 64),
                                                  batch_size = 32,
-                                                 class_mode = 'binary')
+  #dependent variable is binary or categorical
+                                               class_mode = 'binary')
 
 test_set = test_datagen.flow_from_directory('dataset/test_set',
                                             target_size = (64, 64),
                                             batch_size = 32,
                                             class_mode = 'binary')
-
+#fitting the model 
 classifier.fit_generator(training_set,
-                         samples_per_epoch = 8000,
+                         samples_per_epoch = 8000,#no of images in the training set
                          nb_epoch = 25,
                          validation_data = test_set,
-                         nb_val_samples = 2000)
+                         nb_val_samples = 2000)#no of images in the test set
