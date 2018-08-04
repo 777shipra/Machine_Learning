@@ -39,6 +39,11 @@ classifier = Sequential()
 classifier.add(Convolution2D(32, 3, 3, input_shape = (64, 64, 3), activation = 'relu'))
 
 # Step 2 - Pooling
+#size of feature map is reduced to half in this step
+#reducing in feature map reduce the set of nodes in fully connected layers 
+#hence making model high computational and less time complexity
+#size of the subtable to slide over the feature map , it is an 2X2 matrix (general)
+#by 2X2 we don't lose the originality of the image 
 classifier.add(MaxPooling2D(pool_size = (2, 2)))
 
 # Adding a second convolutional layer
@@ -46,6 +51,9 @@ classifier.add(Convolution2D(32, 3, 3, activation = 'relu'))
 classifier.add(MaxPooling2D(pool_size = (2, 2)))
 
 # Step 3 - Flattening
+#why don't we lose the originality of features by flatting
+#because we already extracted the features by convolutional and pooling steps applied on the input image 
+#flattening gives us one single vector  
 classifier.add(Flatten())
 
 # Step 4 - Full connection
